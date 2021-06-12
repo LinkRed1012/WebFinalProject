@@ -1,0 +1,31 @@
+.Most_Out{
+    display: flex;
+    justify-content: center;
+}
+
+.Out_Side{
+    width:1000px;
+    height:100px;
+    background-color:#D4E6F8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.In_Side{
+    background-color:#FFC991;
+    width:950px;
+    height:90px;
+    margin-top:20px;
+    margin-right:50px;
+    margin-left:50px;
+    margin-bottom:20px;
+   
+}
+.Let_Title_Mid{
+    font-size: 40px;
+    color: coral;
+    text-align: center;
+    margin-top:20px;
+    margin-bottom:20px;
+}

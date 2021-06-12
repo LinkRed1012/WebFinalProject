@@ -1,0 +1,31 @@
+.Most_Out_Basket{
+    display: flex;
+    justify-content: center;
+}
+
+.Out_Side_Basket{
+    width:250px;
+    height:100px;
+    background-color:#D4E6F8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.In_Side_Basket{
+    background-color:greenyellow;
+    width:200px;
+    height:90px;
+    margin-top:20px;
+    margin-right:30px;
+    margin-left:30px;
+    margin-bottom:20px;
+   
+}
+.Let_Title_Mid_Basket{
+    font-size: 40px;
+    color: coral;
+    text-align: center;
+    margin-top:20px;
+    margin-bottom:20px;
+}

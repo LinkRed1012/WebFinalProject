@@ -1,0 +1,7 @@
+.done {
+    color:greenyellow;
+    text-decoration: line-through;
+  }
+.undone {
+  color: deeppink;
+ }
