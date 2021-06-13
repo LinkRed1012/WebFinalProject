@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import {Link } from "react-router-dom"
+import axios from "axios"
 
 
 
@@ -70,6 +71,27 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login_page() {
 
+  const [personal_account, setPersonal_account ] = useState("");
+  const [personal_password, setPersonal_password ] = useState("");
+  const [editMode, setEditMode] = useState(false);
+
+  const handleSubmit = e =>{
+     
+      console.log(personal_account)
+      console.log(personal_password)
+
+      let formData = new FormData()
+      formData.append("personal_account",personal_account)
+      formData.append("personal_password",personal_password)
+
+    const url = "http://localhost/account_data/login.php";
+    axios.post(url,formData)
+    .then(res=>console.log(res.data))
+    .catch(err=>console.log(err)) ;
+  }
+
+  
+
   const classes = useStyles();
 
     return (
@@ -87,38 +109,49 @@ export default function Login_page() {
               Sign in
             </Typography>
             <form className={classes.form} noValidate>
-              <TextField
-              
+              <TextField    
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address or phone number"
-                name="email"
-                autoComplete="email"
+                id="personal_account"
+                label="personal_account"
+                name="personal_account"
                 autoFocus
+                onChange={(account) => setPersonal_account(account.target.value)}
+              // onClick={() => {
+              //   if (!editMode) {
+              //     window.location.href = `personal_account:${personal_account}`;
+              //   }
+              // }}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
+                name="personal_password"
+                label="personal_password"
+                type="personal_password"
+                id="personal_password"
+                onChange={(password) => setPersonal_password(password.target.value)}
+                // onClick={() => {
+                //   if (!editMode) {
+                //     window.location.href = `personal_personal:${personal_password}`;
+                //   }
+                // }}
               />
-              <Link exact to = "/MainPage">
+              <Link exact to = "/MainPage"> 
               <Button
                 type="submit"
                 halfWidth
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                onClick={() => setEditMode(!editMode) }
+                onClick={handleSubmit}
                 >
                 Sign In
               </Button>
-              </Link>
+              </Link> 
               <Link exact to = "/signup" >
                 <Button
                 type="submit"

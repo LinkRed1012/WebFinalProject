@@ -23,7 +23,5 @@ export default function Initial_Web(){
                 <Route path = "/" ><SignInSide/></Route>
             </Switch>            
         </Router>
-            
-        
     )
 } 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,9 +11,10 @@ import Grid from '@material-ui/core/Grid';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-
+//import inserting from './PHP/inserting';
+import ReactDOM from 'react-dom';
 import {Link } from "react-router-dom";
-
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,9 +49,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Sing_up_page() {
-  const classes = useStyles();
 
+export default function Sing_up_page() {
+
+const [personal_id, setPersonal_id ] = useState("");
+const [personal_account, setPersonal_account ] = useState("");
+const [personal_password, setPersonal_password ] = useState("");
+const [editMode, setEditMode] = useState(false);
+
+const handleSubmit = (e) =>{
+  
+  console.log(personal_id);
+  console.log(personal_account);
+  console.log(personal_password);
+
+  let formData = new FormData()
+  formData.append("personal_id",personal_id)
+  formData.append("personal_account",personal_account)
+  formData.append("personal_password",personal_password)
+
+const url = "http://localhost/account_data/inserting.php";
+axios.post(url,formData)
+.then(res=>console.log(res.data))
+.catch(err=>console.log(err)) ;
+}
+
+  const classes = useStyles();
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -68,48 +92,66 @@ export default function Sing_up_page() {
               margin="normal"
               required
               fullWidth
-              id="input-with-icon-textfield"
+              id="personal_id"
+              type="personal_id"
               label="name or userid"
-              name="input-with-icon-textfield"
-              autoComplete="input-with-icon-textfield"
+              name="personal_id"
               helperText="please enter your name or userid"
+              onChange={(id) => setPersonal_id(id.target.value)}
+              // onClick={() => {
+              //   if (!editMode) {
+              //     window.location.href = `personal_id:${personal_id}`;
+              //   }
+              // }}
+              autoFocus
+            />
+             
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="personal_account"
+              type="personal_account"
+              label="account"
+              name="personal_account"
+              helperText="please enter your account"
+              onChange={(account) => setPersonal_account(account.target.value)}
+              // onClick={() => {
+              //   if (!editMode) {
+              //     window.location.href = `personal_account:${personal_account}`;
+              //   }
+              // }}
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              id="number"
-              label="Email Address or phone number"
-              name="email"
-              autoComplete="email"
-              helperText="please enter your email"
-              autoFocus
-            />
-            <TextField
-              
-              margin="normal"
-              required
-              fullWidth
-              name="password"
+              name="personal_password"
               label="Password"
-              type="password"
-              id="password"
+              type="personal_password"
+              id="personal_password"
               helperText="please enter your password"
-              autoComplete="current-password"
+              onChange={(password) => setPersonal_password(password.target.value)}
+              // onClick={() => {
+              //   if (!editMode) {
+              //     window.location.href = `personal_personal:${personal_password}`;
+              //   }
+              // }}
             />
-            <Link exact to = "/">
+             <Link exact to = "/"> 
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
+              onClick={() => setEditMode(!editMode)}
+              onClick={handleSubmit}
               className={classes.submit}
             >
             Submit
             </Button>
-            </Link>
+            </Link> 
             <Box mt={3}>
             </Box>
           </form>
