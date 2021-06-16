@@ -50,12 +50,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
+
 export default function Sing_up_page() {
 
 const [personal_id, setPersonal_id ] = useState("");
 const [personal_account, setPersonal_account ] = useState("");
 const [personal_password, setPersonal_password ] = useState("");
 const [editMode, setEditMode] = useState(false);
+
+
 
 const handleSubmit = (e) =>{
   
@@ -68,11 +72,13 @@ const handleSubmit = (e) =>{
   formData.append("personal_account",personal_account)
   formData.append("personal_password",personal_password)
 
-const url = "http://localhost/account_data/inserting.php";
+const url = "http://100.25.157.222/account_data/inserting.php";
 axios.post(url,formData)
 .then(res=>console.log(res.data))
 .catch(err=>console.log(err)) ;
 }
+
+
 
   const classes = useStyles();
   return (
@@ -98,11 +104,7 @@ axios.post(url,formData)
               name="personal_id"
               helperText="please enter your name or userid"
               onChange={(id) => setPersonal_id(id.target.value)}
-              // onClick={() => {
-              //   if (!editMode) {
-              //     window.location.href = `personal_id:${personal_id}`;
-              //   }
-              // }}
+              
               autoFocus
             />
              
@@ -116,11 +118,6 @@ axios.post(url,formData)
               name="personal_account"
               helperText="please enter your account"
               onChange={(account) => setPersonal_account(account.target.value)}
-              // onClick={() => {
-              //   if (!editMode) {
-              //     window.location.href = `personal_account:${personal_account}`;
-              //   }
-              // }}
               autoFocus
             />
             <TextField
@@ -133,11 +130,7 @@ axios.post(url,formData)
               id="personal_password"
               helperText="please enter your password"
               onChange={(password) => setPersonal_password(password.target.value)}
-              // onClick={() => {
-              //   if (!editMode) {
-              //     window.location.href = `personal_personal:${personal_password}`;
-              //   }
-              // }}
+              
             />
              <Link exact to = "/"> 
             <Button

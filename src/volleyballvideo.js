@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import {Link } from "react-router-dom";
+import axios from 'axios'
 
 const drawerWidth = 240;
 
@@ -42,6 +43,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PermanentDrawerLeft() {
   const classes = useStyles();
+  const [personal_login, setPersonal_login ] = useState("1");
+  const bye = (e) =>{
+  console.log(personal_login)
+  let formData = new FormData()
+  formData.append("personal_login",personal_login)
+  
+  const url = "http://100.25.157.222/account_data/api/post/logout_post.php";
+  axios.post(url,formData)
+  .then(res=>console.log(res.data))
+  .catch(err=>console.log(err)) ;
+  }
 
   return (
     <div className={classes.root}>
@@ -49,7 +61,7 @@ export default function PermanentDrawerLeft() {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap>
-            
+            排球影片
           </Typography>
         </Toolbar>
       </AppBar>
@@ -118,7 +130,7 @@ export default function PermanentDrawerLeft() {
         <Link exact to = "/">
         <List >
           {['登出'].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={text} onClick={bye}>
               {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItem>
@@ -129,11 +141,40 @@ export default function PermanentDrawerLeft() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph>
-         
+          各個位置的世界級球星
         </Typography>
-        <Typography paragraph>
-          
-        </Typography>
+            大砲:日本-石川祐希
+            <Typography/>
+            <iframe width="400" height="225" src="https://www.youtube.com/embed/ryK33a6Ym7I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <Typography/>
+            波蘭-Wilfredo Leon
+            <Typography/>
+            <iframe width="400" height="225" src="https://www.youtube.com/embed/S1i4ZUwOrb8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <Typography/>
+            攔中:俄羅斯-Ivan Iakovlev
+            <Typography/>
+            <iframe width="400" height="225" src="https://www.youtube.com/embed/2wWzuKDNnjM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <Typography/>
+            舉球:巴西-Bruno Resende
+            <Typography/>
+            <iframe width="400" height="225" src="https://www.youtube.com/embed/EmjsH1Hs5O8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <Typography/>
+            長庚資工舉球第一人-吳紹齊，  詳情請見影片7:00
+            <Typography/>
+            <iframe width="400" height="225" src="https://www.youtube.com/embed/IScIiu6T6ag" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <Typography/>
+            舉對:義大利-Ivan zaytsev
+            <Typography/>
+            <iframe width="400" height="225" src="https://www.youtube.com/embed/kFlZ7u8i5LQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <Typography/>
+            日本-西田有志
+            <Typography/>
+            <iframe width="400" height="225" src="https://www.youtube.com/embed/iijvUf5xkkU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <Typography/>
+            自由:法國-Jenia Grebennikov
+            <Typography/>
+            <iframe width="400" height="225" src="https://www.youtube.com/embed/pOAxvRS-wPo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
       </main>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState }from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,8 +13,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import {Link } from "react-router-dom"
+import axios from 'axios'
 
 const drawerWidth = 240;
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,9 +42,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
+
 export default function PermanentDrawerLeft() {
   const classes = useStyles();
-
+  const [personal_login, setPersonal_login ] = useState("1");
+  const bye = (e) =>{
+  console.log(personal_login)
+  let formData = new FormData()
+  formData.append("personal_login",personal_login)
+  
+  const url = "http://100.25.157.222/account_data/api/post/logout_post.php";
+  axios.post(url,formData)
+  .then(res=>console.log(res.data))
+  .catch(err=>console.log(err)) ;
+  }
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -119,7 +134,7 @@ export default function PermanentDrawerLeft() {
         <Link exact to = "/">
         <List >
           {['登出'].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={text} onClick={bye} >
               {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItem>
@@ -130,7 +145,7 @@ export default function PermanentDrawerLeft() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph>
-        籃球，為一種由兩隊參與，在一個長方形籃球場進行的球類運動。每隊出場5名隊員，可將球向任何方向傳、投、拍、滾或運，目的是將籃球投入對方球籃得分，並阻止對方獲得控球權或得分。籃球是世界上最多人觀看的球類活動之一[1]，從1936年起就是奧運會的正式競賽項目之一[2]。在三分線內投進可得兩分，若在三分線外投籃，可以得到三分。在比賽結束時，得分最多的球隊獲勝，但若二隊平手，會進行延長賽。在球賽中，控球者可以用持續運球（將球彈到地上，再反彈到自己手中）的方式行進或奔跑，也可以將球傳給其他隊員，但若走步（掌控球者沒有運球，且移動超過指定範圍或指定方式）、翻球或二次運球均是違例。
+        籃球，為一種由兩隊參與，在一個長方形籃球場進行的球類運動。每隊出場5名隊員，可將球向任何方向傳、投、拍、滾或運，目的是將籃球投入對方球籃得分，並阻止對方獲得控球權或得分。籃球是世界上最多人觀看的球類活動之一，從1936年起就是奧運會的正式競賽項目之一。在三分線內投進可得兩分，若在三分線外投籃，可以得到三分。在比賽結束時，得分最多的球隊獲勝，但若二隊平手，會進行延長賽。在球賽中，控球者可以用持續運球（將球彈到地上，再反彈到自己手中）的方式行進或奔跑，也可以將球傳給其他隊員，但若走步（掌控球者沒有運球，且移動超過指定範圍或指定方式）、翻球或二次運球均是違例。
         <Typography/>
         違例是違反籃球比賽的遊戲規則，罰則為失去控球權並由對方發界外球。犯規則分為一般性的犯規（如有身體接觸而侵犯他人等）與技術性犯規（如粗言穢語、不服判決、延誤比賽等非體育道德行為等），若個人於單場比賽中累計犯規超過一定次數，將被判下場，無法繼續上場比賽。若有一球隊正要投籃時，防守球隊犯規，進攻球隊獲得罰球的機會。如有技術性犯規（例如動作粗野，侮辱對手）時，另一隊可以罰球，而且罰球後可自中場發球。
     <   Typography/>
@@ -157,7 +172,7 @@ export default function PermanentDrawerLeft() {
             一般都由隊中最高的球員擔任，傳統上強調籃下的防守，以及防守籃板球的保護。由於具有身高的優勢，一些具備進攻天份的中鋒球員也常常成為在禁區附近投籃得分的主要進攻點。例如：zaza pachulia PS:勇士因為有他才打敗馬刺的
         </Typography>
         <Typography paragraph>
-          <h11>參考資料：維基百科</h11>
+          參考資料：維基百科
         </Typography>
       </main>
     </div>

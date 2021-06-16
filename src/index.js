@@ -4,11 +4,12 @@ import './index.css';
 import Login_page from './login_page/login_page'
 import reportWebVitals from './reportWebVitals'
 import Initial_Web from './js/View/Initial_Web'
+import Test from './test'
 
 
 ReactDOM.render(
    <React.StrictMode>
-        <Initial_Web/>
+      <Initial_Web />
    </React.StrictMode>,
           
   document.getElementById('root')

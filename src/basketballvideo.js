@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import {Link } from "react-router-dom";
+import axios from 'axios'
 
 const drawerWidth = 240;
 
@@ -42,6 +43,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PermanentDrawerLeft() {
   const classes = useStyles();
+  const [personal_login, setPersonal_login ] = useState("1");
+  const bye = (e) =>{
+  console.log(personal_login)
+  let formData = new FormData()
+  formData.append("personal_login",personal_login)
+  
+  const url = "http://100.25.157.222/account_data/api/post/logout_post.php";
+  axios.post(url,formData)
+  .then(res=>console.log(res.data))
+  .catch(err=>console.log(err)) ;
+  }
 
   return (
     <div className={classes.root}>
@@ -118,7 +130,7 @@ export default function PermanentDrawerLeft() {
         <Link exact to = "/">
         <List >
           {['登出'].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={text} onClick={bye}>
               {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItem>

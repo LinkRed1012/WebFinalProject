@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,25 +14,21 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import {Link } from "react-router-dom"
 import axios from "axios"
-
-
-
-
-
+import { ComputerSharp } from '@material-ui/icons';
 
 
 function Copyright() {
   return (
     <Typography variant="body2" color="red" align="center">
       {'Copyright © '}
-      <links color="inherit" href="https://www.instagram.com/mao_._oo/">
-        Sam Mao
-      </links>{' '}
+      
       {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
 }
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,29 +64,60 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
 export default function Login_page() {
-
+  // const {star} = useFetch();
   const [personal_account, setPersonal_account ] = useState("");
   const [personal_password, setPersonal_password ] = useState("");
-  const [editMode, setEditMode] = useState(false);
+  const [personal_login , setPersonal_login] = useState("0");
+  const [statement , setStatement] = useState("0");
+  const [star , setState] = useState([]) ;
+//   useEffect(() =>{
+//     const cc = async () =>{
+//       const response = await fetch("http://localhost/account_data/api/post/personal.php" );
+//       const data = await response.json();
+//       const [item] = data;
+//       setState(item);
+//       console.log(item);
+//     }
+//       cc();
+// },[statement]);
 
-  const handleSubmit = e =>{
-     
+// const zclick = (star) =>{
+    
+//   console.log(star.personal_login)
+//   if (star.personal_login == 1){
+//     //window.location.assign("http://localhost:3000/Mainpage");
+//     console.log(100)
+//   }else{
+//     console.log(100000000000)
+//     // window.location.assign("http://localhost:3000/Mainpage");
+//   }
+// }
+  
+  const handleSubmit = (e) =>{
+      e.preventDefault();
       console.log(personal_account)
       console.log(personal_password)
-
+      console.log(personal_login)
       let formData = new FormData()
       formData.append("personal_account",personal_account)
       formData.append("personal_password",personal_password)
-
-    const url = "http://localhost/account_data/login.php";
+      formData.append("personal_login",personal_login);
+    const url = "http://100.25.157.222/account_data/login.php";
     axios.post(url,formData)
     .then(res=>console.log(res.data))
     .catch(err=>console.log(err)) ;
+    
+    if(statement == 1){
+      window.location.assign("http://localhost:3000/Mainpage");
+    }else{
+      setStatement(1);
+    }
   }
 
-  
+
+
+
 
   const classes = useStyles();
 
@@ -105,7 +132,6 @@ export default function Login_page() {
               <AccountBoxIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Welecome to this web ,
               Sign in
             </Typography>
             <form className={classes.form} noValidate>
@@ -115,14 +141,11 @@ export default function Login_page() {
                 fullWidth
                 id="personal_account"
                 label="personal_account"
+                type="personal_account"
                 name="personal_account"
                 autoFocus
                 onChange={(account) => setPersonal_account(account.target.value)}
-              // onClick={() => {
-              //   if (!editMode) {
-              //     window.location.href = `personal_account:${personal_account}`;
-              //   }
-              // }}
+              
               />
               <TextField
                 margin="normal"
@@ -133,25 +156,21 @@ export default function Login_page() {
                 type="personal_password"
                 id="personal_password"
                 onChange={(password) => setPersonal_password(password.target.value)}
-                // onClick={() => {
-                //   if (!editMode) {
-                //     window.location.href = `personal_personal:${personal_password}`;
-                //   }
-                // }}
               />
-              <Link exact to = "/MainPage"> 
+             
               <Button
                 type="submit"
-                halfWidth
+                fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={() => setEditMode(!editMode) }
                 onClick={handleSubmit}
+                // onClick={setStatement(1)}
+                //  onClick={zclick(star)}
                 >
                 Sign In
               </Button>
-              </Link> 
+              
               <Link exact to = "/signup" >
                 <Button
                 type="submit"
@@ -163,6 +182,7 @@ export default function Login_page() {
                 Sign Up
                 </Button>
               </Link>
+
               <Box mt={3}>
                 <Copyright />
               </Box>
@@ -171,5 +191,4 @@ export default function Login_page() {
         </Grid>
       </Grid>
     );
-  
 }
