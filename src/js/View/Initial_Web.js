@@ -3,28 +3,22 @@ import './Initial_Web_Form.css';
 import SignInSide from '../../login_page/login_page';
 import UserNames from './mainID';
 //import Todo from './Todo/TodoApp'
-import { BrowserRouter as Router,Route,Switch,Link } from "react-router-dom";
+import { BrowserRouter as Router,Route,Switch } from "react-router-dom";
 import Singuppage from '../../sing_up/sing_up_page'
 import MainPage from '../../MainPage'
 import Volleyball from '../../volleyball'
 import Basketballvideo from '../../basketballvideo'
 import Volleyballvideo from '../../volleyballvideo'
 import ReactGA from 'react-ga'
-import { useLocation } from "react-router-dom";
+
 
 ReactGA.initialize('UA-193248929-1');
-
-
-
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 export default function Initial_Web(){
-    
-    const location = useLocation(); 
 
-    useEffect(() => {
-        // To Report Page View 
-        ReactGA.pageview(location.pathname + location.search);
-      }, [location]);
+
+
     return(  
         <Router>
             <Switch>
